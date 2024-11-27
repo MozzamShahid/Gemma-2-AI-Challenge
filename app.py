@@ -9,7 +9,7 @@ def user_request():
     if not user_data:
         return jsonify({'error': 'No data provided'}), 400
 
-    # Process the user request here (you can modify this based on your need)
+    
     action = user_data.get('action')
 
     if action == 'get_info':
@@ -23,7 +23,7 @@ def user_request():
 # Endpoint for system to respond to status or other system-level information (GET request)
 @app.route('/system/status', methods=['GET'])
 def system_status():
-    # You can add logic here to check system health, status, etc.
+    
     status_info = {
         'system_status': 'Running',
         'uptime': '24 hours',  # Example of system uptime
@@ -32,10 +32,10 @@ def system_status():
     return jsonify(status_info), 200
 
 
-# Endpoint for user to check the result of a previous request (optional, GET request)
+
 @app.route('/user/result', methods=['GET'])
 def user_result():
-    # This can retrieve data or results from a previous user request
+    
     result_data = {
         'result': 'Your previous request was successful!',
         'details': 'You requested XYZ and it has been processed.'
