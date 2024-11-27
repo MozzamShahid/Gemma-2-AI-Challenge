@@ -5,7 +5,7 @@ import { ChatInput } from "./chat-input"
 export function ChatContainer() {
   return (
     <div className="flex-1 flex flex-col">
-      <ChatHeader />
+      <div className="ml-20 mr-20 mt-3"><ChatHeader /></div>
       <ChatMessages />
       <ChatInput />
     </div>
