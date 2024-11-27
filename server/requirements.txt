@@ -1,0 +1,8 @@
+Flask==2.0.1
+Flask-Cors==3.0.10
+Flask-SQLAlchemy==2.5.1
+Werkzeug==2.0.1
+transformers==4.38.1
+torch==2.2.0
+accelerate==0.27.2
+
