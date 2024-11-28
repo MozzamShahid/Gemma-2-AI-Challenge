@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import Flask
 from flask_cors import CORS
 from config import Config
 from routes import auth, chat, analysis
@@ -7,7 +8,7 @@ from oauth import init_oauth
 
 app = Flask(__name__)
 app.config.from_object(Config)
-CORS(app)
+CORS(app, supports_credentials=True)  # Update this line
 
 # Initialize the database
 db.init_app(app)

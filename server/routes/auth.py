@@ -21,7 +21,14 @@ def login():
     user = User.query.filter_by(username=data['username']).first()
     if user and check_password_hash(user.password_hash, data['password']):
         login_user(user)
-        return jsonify({'message': 'Login successful'}), 200
+        return jsonify({
+            'message': 'Login successful',
+            'user': {
+                'id': user.id,
+                'username': user.username,
+                'email': user.email
+            }
+        }), 200
     return jsonify({'message': 'Invalid credentials'}), 401
 
 @bp.route('/google-login')
@@ -30,7 +37,21 @@ def google_login():
         return redirect(url_for('google.login'))
     resp = google.get("/oauth2/v2/userinfo")
     assert resp.ok, resp.text
-    return jsonify(resp.json())
+    user_info = resp.json()
+    user = User.query.filter_by(email=user_info['email']).first()
+    if not user:
+        user = User(username=user_info['email'], email=user_info['email'], google_id=user_info['id'])
+        db.session.add(user)
+        db.session.commit()
+    login_user(user)
+    return jsonify({
+        'message': 'Login successful',
+        'user': {
+            'id': user.id,
+            'username': user.username,
+            'email': user.email
+        }
+    }), 200
 
 @bp.route('/logout')
 @login_required
