@@ -1,9 +1,10 @@
 from .gemma_service import gemma_service
+import json
 
 def analyze_startup_stats(data):
     prompt = f"""
     Analyze the following startup stats and provide insights:
-    {data}
+    {json.dumps(data)}
     
     Please provide:
     1. A success ratio (0.0 to 1.0)
@@ -16,8 +17,16 @@ def analyze_startup_stats(data):
     
     response = gemma_service.generate_response(prompt)
     
-    # Note: In a production environment, you'd want to add error handling and
-    # parsing of the JSON response. For simplicity, we're assuming the model
-    # returns perfectly formatted JSON.
-    
-    return eval(response)
+    try:
+        analysis = json.loads(response)
+        return analysis
+    except json.JSONDecodeError:
+        # If the response is not valid JSON, return a default structure
+        return {
+            "success_ratio": 0.5,
+            "strengths": ["Unable to determine strengths"],
+            "weaknesses": ["Unable to determine weaknesses"],
+            "recommendations": ["Unable to provide recommendations"]
+        }
+
+

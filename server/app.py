@@ -1,20 +1,28 @@
-from flask import Flask
+import os
 from flask import Flask
 from flask_cors import CORS
 from config import Config
 from routes import auth, chat, analysis
 from models.user import db
 from oauth import init_oauth
+from services.gemma_service import init_gemma_service
 
 app = Flask(__name__)
 app.config.from_object(Config)
-CORS(app, supports_credentials=True)  # Update this line
+CORS(app, supports_credentials=True)
+
+# Set Kaggle environment variables
+os.environ["KAGGLE_USERNAME"] = app.config['KAGGLE_USERNAME']
+os.environ["KAGGLE_KEY"] = app.config['KAGGLE_KEY']
 
 # Initialize the database
 db.init_app(app)
 
 # Initialize OAuth
 init_oauth(app)
+
+# Initialize Gemma Service
+init_gemma_service()
 
 # Register blueprints
 app.register_blueprint(auth.bp)

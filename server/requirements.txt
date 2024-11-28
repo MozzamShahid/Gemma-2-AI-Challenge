@@ -2,7 +2,9 @@ Flask==2.0.1
 Flask-Cors==3.0.10
 Flask-SQLAlchemy==2.5.1
 Werkzeug==2.0.1
-transformers==4.38.1
 torch==2.2.0
-accelerate==0.27.2
+sentencepiece==0.1.99
+immutabledict==2.0.0
+kaggle==1.5.16
 Flask-Dance==6.2.0
+python-dotenv==0.19.1
