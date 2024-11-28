@@ -5,4 +5,4 @@ Werkzeug==2.0.1
 transformers==4.38.1
 torch==2.2.0
 accelerate==0.27.2
-
+Flask-Dance==6.2.0

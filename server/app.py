@@ -3,6 +3,7 @@ from flask_cors import CORS
 from config import Config
 from routes import auth, chat, analysis
 from models.user import db
+from oauth import init_oauth
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -10,6 +11,9 @@ CORS(app)
 
 # Initialize the database
 db.init_app(app)
+
+# Initialize OAuth
+init_oauth(app)
 
 # Register blueprints
 app.register_blueprint(auth.bp)
