@@ -85,9 +85,9 @@ pip install -r requirements.txt
 
 ```
 SECRET_KEY=your_secret_key
-DATABASE_URL=sqlite:///app.db
-GOOGLE_OAUTH_CLIENT_ID=your_google_client_id
-GOOGLE_OAUTH_CLIENT_SECRET=your_google_client_secret
+DATABASE_URL=your_database_url
+GOOGLE_OAUTH_CLIENT_ID=your_google_oauth_client_id
+GOOGLE_OAUTH_CLIENT_SECRET=your_google_oauth_client_secret
 KAGGLE_USERNAME=your_kaggle_username
 KAGGLE_KEY=your_kaggle_api_key
 ```

@@ -8,7 +8,6 @@ from oauth import init_oauth
 from services.gemma_service import init_gemma_service
 from services.document_processor import process_document
 
-
 app = Flask(__name__)
 app.config.from_object(Config)
 CORS(app, supports_credentials=True)

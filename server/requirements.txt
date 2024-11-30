@@ -3,7 +3,6 @@ Flask-Cors==3.0.10
 Flask-SQLAlchemy==2.5.1
 Werkzeug==2.0.1
 torch==2.2.0
-kagglehub==0.1.4
 sentencepiece==0.1.99
 immutabledict==2.0.0
 kaggle==1.5.16
@@ -13,3 +12,5 @@ python-docx==0.8.11
 python-pptx==0.6.21
 pytesseract==0.3.8
 Pillow==8.3.2
+kagglehub==0.1.4
+Flask-Dance==6.2.0

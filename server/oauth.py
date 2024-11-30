@@ -6,8 +6,8 @@ from models.user import User, db
 
 def init_oauth(app):
     google_bp = make_google_blueprint(
-        client_id="YOUR_GOOGLE_CLIENT_ID",
-        client_secret="YOUR_GOOGLE_CLIENT_SECRET",
+        client_id=app.config['GOOGLE_OAUTH_CLIENT_ID'],
+        client_secret=app.config['GOOGLE_OAUTH_CLIENT_SECRET'],
         scope=["profile", "email"]
     )
     app.register_blueprint(google_bp, url_prefix="/login")
@@ -39,3 +39,4 @@ def init_oauth(app):
             login_user(user)
 
         return False  # Disable Flask-Dance's default behavior
+
