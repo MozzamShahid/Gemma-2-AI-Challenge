@@ -3,6 +3,7 @@ Flask-Cors==3.0.10
 Flask-SQLAlchemy==2.5.1
 Werkzeug==2.0.1
 torch==2.2.0
+kagglehub==0.1.4
 sentencepiece==0.1.99
 immutabledict==2.0.0
 kaggle==1.5.16
