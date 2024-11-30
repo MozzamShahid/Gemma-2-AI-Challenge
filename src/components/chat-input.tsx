@@ -1,28 +1,56 @@
 import { useState } from "react"
 import { PaperclipIcon, SendIcon } from 'lucide-react'
+import axios from 'axios'
 
-// Define the type for the props
 interface ChatInputProps {
   onSendMessage: (message: string) => void;
 }
 
 export function ChatInput({ onSendMessage }: ChatInputProps) {
   const [inputValue, setInputValue] = useState<string>("")
+  const [file, setFile] = useState<File | null>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (inputValue.trim()) {
       onSendMessage(inputValue)
-      setInputValue("") // Clear input field after sending
+      setInputValue("")
+    }
+    if (file) {
+      await handleFileUpload()
+    }
+  }
+
+  const handleFileUpload = async () => {
+    if (!file) return
+
+    const formData = new FormData()
+    formData.append('file', file)
+
+    try {
+      const response = await axios.post('http://localhost:5000/chat/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      console.log('File uploaded successfully:', response.data)
+      setFile(null)
+    } catch (error) {
+      console.error('Error uploading file:', error)
     }
   }
 
   return (
     <div className="p-4 border-t border-gray-200">
       <form onSubmit={handleSubmit} className="flex items-center gap-4 bg-[#2e0b4e] rounded-full border border-[#4c2a64] shadow-xl px-6 py-3">
-        <button className="text-gray-300 hover:text-white transition-colors" aria-label="Attach file">
-          <PaperclipIcon className="w-5 h-5" />
-        </button>
+        <label className="cursor-pointer">
+          <input
+            type="file"
+            className="hidden"
+            onChange={(e) => setFile(e.target.files?.[0] || null)}
+          />
+          <PaperclipIcon className="w-5 h-5 text-gray-300 hover:text-white transition-colors" />
+        </label>
         <input
           type="text"
           placeholder="How can we assist you today?"
@@ -39,6 +67,7 @@ export function ChatInput({ onSendMessage }: ChatInputProps) {
           <SendIcon className="w-5 h-5" />
         </button>
       </form>
+      {file && <p className="mt-2 text-sm text-gray-300">File selected: {file.name}</p>}
     </div>
   )
 }

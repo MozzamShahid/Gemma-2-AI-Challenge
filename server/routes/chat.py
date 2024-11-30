@@ -34,10 +34,3 @@ def send_message():
         'user_message': {'id': user_message.id, 'content': user_message.content, 'user_id': user_message.user_id},
         'ai_message': {'id': ai_message.id, 'content': ai_message.content, 'user_id': None}
     }), 201
-
-@bp.route('/upload', methods=['POST'])
-@login_required
-def upload_file():
-    # Implement file upload logic here
-    return jsonify({'message': 'File uploaded successfully'}), 201
-
