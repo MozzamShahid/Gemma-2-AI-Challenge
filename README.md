@@ -1,3 +1,5 @@
+![CHAT-AI (2)](https://github.com/user-attachments/assets/ef7bbfc4-792b-48f8-9c8b-d0e88b5fac93)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
